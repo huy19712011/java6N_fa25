@@ -36,15 +36,26 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public Todo update(Todo todo, long id) {
 
-        return todoRepository
-                .findById(id)
-                .map(existing -> {
-                    if (todo.getTitle() != null) existing.setTitle(todo.getTitle());
-                    if (todo.getDescription() != null) existing.setDescription(todo.getDescription());
-                    existing.setCompleted(todo.isCompleted());
-                    return todoRepository.save(existing);
-                })
-                .orElse(null);
+        Todo retrievedTodo = findById(id);
+
+        if (retrievedTodo == null) return null;
+
+        retrievedTodo.setTitle(todo.getTitle());
+        retrievedTodo.setDescription(todo.getDescription());
+        retrievedTodo.setCompleted(todo.isCompleted());
+        return todoRepository.save(retrievedTodo);
+
+        //return todoRepository
+        //        .findById(id)
+        //        .map(existing -> {
+        //            if (todo.getTitle() != null) existing.setTitle(todo.getTitle());
+        //            if (todo.getDescription() != null) existing.setDescription(todo.getDescription());
+        //            existing.setCompleted(todo.isCompleted());
+        //            return todoRepository.save(existing);
+        //        })
+        //        .orElse(null);
+
+
     }
 
     @Override

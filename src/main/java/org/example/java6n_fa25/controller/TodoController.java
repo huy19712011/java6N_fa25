@@ -6,7 +6,9 @@ import org.example.java6n_fa25.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -36,7 +38,17 @@ public class TodoController {
     public ResponseEntity<Todo> addTodo(@RequestBody Todo todo) {
 
         Todo savedTodo = todoService.add(todo);
+
         return new ResponseEntity<>(savedTodo, HttpStatus.CREATED);
+
+        //URI locationUri = ServletUriComponentsBuilder
+        //        .fromCurrentRequest()
+        //        .path("/{id}")
+        //        .buildAndExpand(savedTodo.getId())
+        //        .toUri();
+        //return ResponseEntity.created(locationUri).build();
+
+
     }
 
     @PutMapping("{id}")

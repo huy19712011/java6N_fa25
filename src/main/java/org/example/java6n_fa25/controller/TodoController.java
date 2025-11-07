@@ -3,6 +3,7 @@ package org.example.java6n_fa25.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.java6n_fa25.entity.Todo;
 import org.example.java6n_fa25.service.TodoService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,27 @@ public class TodoController {
     public ResponseEntity<List<Todo>> getAllTodos() {
 
         List<Todo> todos = todoService.findAll();
-        //return ResponseEntity.ok(todos);
+        //return ResponseEntity.ok(todos); // utility
+        //return new ResponseEntity<>(todos, HttpStatus.BAD_REQUEST); // we can return with different status codes for different scenarios
+
+        // Additionally, we can set HTTP headers
+        //HttpHeaders headers = new HttpHeaders();
+        //headers.add("Custom-Header", "custom value");
+        //return new ResponseEntity<>(todos, headers, HttpStatus.OK);
+
+        //
+        //https://www.baeldung.com/spring-response-entity
+        //BodyBuilder accepted();
+        //BodyBuilder badRequest();
+        //BodyBuilder created(java.net.URI location);
+        //HeadersBuilder<?> noContent();
+        //HeadersBuilder<?> notFound();
+        //BodyBuilder ok();
+
+        // return ResponseEntity.status(HttpStatus.OK).body(todos);
+        //return ResponseEntity.badRequest().body(todos);
+        //return ResponseEntity.ok().header("Custom-Header", "custom-value").body(todos);
+
         return new ResponseEntity<>(todos, HttpStatus.OK);
     }
 

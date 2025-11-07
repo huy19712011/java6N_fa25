@@ -71,5 +71,14 @@ public class TodoServiceImpl implements TodoService {
         }
 
         return deletedTodo;
+
+        //return todoRepository.findById(id)
+        //        .map(todo -> {
+        //            todoRepository.deleteById(id);
+        //            return todo;
+        //        })
+        //        .orElseThrow(() -> new CustomResourceNotFoundException("Todo not found for this id: " + id));
+
+
     }
 }
